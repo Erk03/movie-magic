@@ -1,4 +1,6 @@
-const movies = [{title: 'Fast and furious',
+const movies = [{
+_id: 1, 
+title: 'Fast and furious',
 genre: 'car',
 director: 'erkan Rasim',
 date: '12.11.21',
@@ -12,5 +14,6 @@ exports.getAll = () => {
 
 exports.create = (movieData) => {
     
+    movieData._id = movies[movies.length - 1]._id + 1;
     movies.push(movieData);
 }    
