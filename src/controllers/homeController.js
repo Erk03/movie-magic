@@ -13,8 +13,15 @@ router.get('/about', (req, res) => {
     res.render('about');
 });
  
+router.get('/search', (req, res) => {
+    const movies = movieService.getAll();
+    res.render('search', { movies });
+})
+
 router.all('/404', (req, res) =>{
     res.render('404')
 })
+
+
 
 module.exports = router;
