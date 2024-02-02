@@ -16,7 +16,7 @@ const castSchema = new mongoose.Schema({
         required: true,
 
     },
-    nameInMovies: {
+    nameInMovie: {
         type: String,
         required: true,
     },
@@ -24,10 +24,15 @@ const castSchema = new mongoose.Schema({
         type: String,
         required: true,
         validate: {
-            validator: function(value) { /^https?:\/\//.test(v) },
+            validator: function(value) { /^https?:\/\//.test(value) },
             message: (props) => `This is invalid url for the cast image`
         }
     },
-    
 
-})
+
+});
+
+
+const Cast = mongoose.model('Cast', castSchema);
+
+module.exports = Cast; 
