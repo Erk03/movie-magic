@@ -1,3 +1,6 @@
+const Movie = require('../models/Movie');
+
+
 const movies = [{
 _id: 1, 
 title: 'Fast and furious',
@@ -12,10 +15,9 @@ exports.getAll = () => {
     return movies.slice();
 }
 
-exports.create = (movieData) => {
+exports.create = async (movieData) => {
     
-    movieData._id = movies[movies.length - 1]._id + 1;
-    movies.push(movieData);
+    const result = await Movie.create(movieData);
 }    
 
 
@@ -33,11 +35,11 @@ exports.search = (title, genre, year) => {
     }
 
     if(genre) {
-        result = result.filter(movie => movie.genre.toLowerCase() === genre.toLowerCase())
+        result = result.filter(movie => movie.genre.toLowerCase() === genre.toLowerCase());
     }
 
     if(year) {
-        result = result.filter(movie => movie.year === year)
+        result = result.filter(movie => movie.year === year);
     }
 
     return result;
