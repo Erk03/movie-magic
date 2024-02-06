@@ -1,31 +1,29 @@
-const router = require('express').Router();
+const router = require("express").Router();
 
-const movieService = require('../services/movieService')
+const movieService = require("../services/movieService");
 
-router.get('/create', (req, res) => {
-    res.render('create');
+router.get("/create", (req, res) => {
+  res.render("create");
 });
-router.post('/create', async (req, res) => {
+router.post("/create", async (req, res) => {
+  const newMovie = req.body;
 
-    const newMovie = req.body;
-
-    try {
-        await movieService.create(newMovie);
-        res.redirect('/');
-    } catch(err) {
-        console.log(err.message);
-        res.redirect('/create')
-    }
-    
+  try {
+    await movieService.create(newMovie);
+    res.redirect("/");
+  } catch (err) {
+    console.log(err.message);
+    res.redirect("/create");
+  }
 });
 
-router.get('/movies/:movieId', async (req, res) => {
-    const movieId = req.params.movieId;
-    const movie = await movieService.getOne(movieId).lean();
+router.get("/movies/:movieId", async (req, res) => {
+  const movieId = req.params.movieId;
+  const movie = await movieService.getOne(movieId).lean();
 
-    movie.ratingStars = "&#x2605;".repeat(movie.rating);
+  movie.ratingStars = "&#x2605;".repeat(movie.rating);
 
-    res.render('details', {movie})
-})
+  res.render("details", { movie });
+});
 
 module.exports = router;
