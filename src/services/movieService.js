@@ -7,7 +7,7 @@ exports.getAll = () => {
 
 exports.create = (movieData) => Movie.create(movieData);
 
-exports.getOne = (movieId) => Movie.findById(movieId);
+exports.getOne = (movieId) => Movie.findById(movieId).populate("casts");
 
 //TODO: filter result in mongodb
 exports.search = async (title, genre, year) => {

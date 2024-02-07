@@ -21,6 +21,7 @@ router.post("/create", async (req, res) => {
 router.get("/movies/:movieId", async (req, res) => {
   const movieId = req.params.movieId;
   const movie = await movieService.getOne(movieId).lean();
+  // const casts = await castService.getByIds(movie.casts).lean();
 
   movie.ratingStars = "&#x2605;".repeat(movie.rating);
 
@@ -30,6 +31,7 @@ router.get("/movies/:movieId", async (req, res) => {
 router.get("/movies/:movieId/attach", async (req, res) => {
   const movie = await movieService.getOne(req.params.movieId).lean();
   const casts = await castService.getAll().lean();
+
   //TODO: remove cloned casts
   res.render("movie/attach", { ...movie, casts });
 });
