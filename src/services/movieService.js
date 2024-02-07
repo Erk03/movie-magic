@@ -31,3 +31,12 @@ exports.search = async (title, genre, year) => {
 
   return result;
 };
+
+exports.attach = async (movieId, castId) => {
+  const movie = await this.getOne(movieId);
+
+  //TODO: validate castsid if exist
+  movie.casts.push(castId);
+
+  return movie.save();
+};
