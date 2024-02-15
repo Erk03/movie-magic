@@ -8,8 +8,10 @@ router.get("/create", isAuth, (req, res) => {
   res.render("create");
 });
 router.post("/create", isAuth, async (req, res) => {
-  const newMovie = req.body;
-
+  const newMovie = {
+    ...req.body,
+    owner: req.user._id,
+  };
   try {
     await movieService.create(newMovie);
     res.redirect("/");
