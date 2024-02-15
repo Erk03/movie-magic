@@ -14,6 +14,7 @@ exports.login = async (email, password) => {
 
   const isValid = await bcrypt.compare(password, user.password);
   if (!isValid) {
+    // res.redirect("/login");
     throw new Error("PCannot find username or password");
   }
 
