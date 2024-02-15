@@ -24,7 +24,8 @@ router.post("/create", isAuth, async (req, res) => {
 router.get("/movies/:movieId", async (req, res) => {
   const movieId = req.params.movieId;
   const movie = await movieService.getOne(movieId).lean();
-  const isOwner = movie.owner == req.user._id;
+  const isOwner = movie.owner == req.user?._id;
+  // const isAuthenticated = !!req.user;
   // const casts = await castService.getByIds(movie.casts).lean();
 
   movie.ratingStars = "&#x2605;".repeat(movie.rating);
